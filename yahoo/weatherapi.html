@@ -1,13 +1,112 @@
-<div ng-app="animateApp">
-    <div ng-controller="cntlr">{{title |uppercase}}
-        <br/>
-        <div ng-bind-html="greeting | linky"></div>
-        <br/>5 day forecast:
-        <div>Days ->{{low}} F / {{high}} F --{{forecast}}</div> <strong>  <div ng-class="bold">TODAY:
-              {{temp}} F
-              {{text}}
+<html ng-app="animateApp">
+
+<head>
+  <meta charset="utf-8" />
+  <title>AngularJS Plunker</title>
+  <script>
+    document.write('<base href="' + document.location + '" />');
+  </script>
+  <link rel="stylesheet" href="style.css" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.10/angular.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.10/angular-sanitize.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<body>
+  <div ng-controller="cntlr">{{title |uppercase}}
+    <br/>
+    <div ng-bind-html="greeting | linky"></div>
+    <br/>Today forecast:
+    <table class="bold">
+
+      <th>DAY</th>
+      <th>DATE</th>
+      <th>LOW F</th>
+      <th>HIGH F</th>
+      <th>Text</th>
+
+      <tr>
+        <td>{{day}}</td>
+        <td>{{forecast.date}}</td>
+        <td>{{low}}</td>
+        <td>{{high}}</td>
+        <td>{{forecast.text}}</td>
+        <td ng-repeat="i in imagetext">
+          <div ng-switch="forecast.text"> 
+            <div ng-switch-when="Isolated Thunderstorms" ng-show="i.id==1">
+              <img ng-src="{{i.img1}}" width="30" height="30" />
             </div>
-    </strong>
-       
+            <div ng-switch-when="Sunny" ng-show="i.id==2">
+              <img ng-src="{{i.img2}}" width="30" height="30"/>
+            </div>
+            <div ng-switch-when="Partly Cloudy" ng-show="i.id==3">
+              <img ng-src="{{i.img3}}" width="30" height="30"  />
+            </div>
+            <div ng-switch-when="Thundershowers" ng-show="i.id==4">
+              <img ng-src="{{i.img4}}" width="30" height="30"  />
+            </div>
+            <div ng-switch-when="Scattered Thunderstorms" ng-show="i.id==5">
+              <img ng-src="{{i.img5}}" width="30" height="30" ng-show="true" />
+            </div>
+            <div ng-switch-when="Mostly Sunny" ng-show="i.id==6">
+              <img ng-src="{{i.img6}}" width="30" height="30" ng-show="true"/>
+            </div>
+            <div ng-switch-when="Showers" ng-show="i.id==7">
+              <img ng-src="{{i.img7}}" width="30" height="30" ng-show="true"/>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+
+
+    <br/>5 Day forecast:
+    <div>
+      <table class="bold">
+        <th>DAY</th>
+        <th>DATE</th>
+        <th>LOW F</th>
+        <th>HIGH F</th>
+        <th>DESC</th>
+
+        <tr ng-repeat="f in fiveday">
+          <td>{{f.day}}</td>
+          <td>{{f.date}}</td>
+          <td>{{f.low}}</td>
+          <td>{{f.high}}</td>
+          <td>{{f.text}}</td>
+          <td ng-repeat="i in imagetext">
+
+            <div ng-if="f.text=='Isolated Thunderstorms'" ng-show="i.id==1">
+              <img ng-src="{{i.img1}}" width="30" height="30" />
+            </div>
+            <div ng-if="f.text=='Sunny'" ng-show="i.id==2">
+              <img ng-src="{{i.img2}}" width="30" height="30" />
+            </div>
+            <div ng-if="f.text=='Partly Cloudy'" ng-show="i.id==3">
+              <img ng-src="{{i.img3}}" width="30" height="30" />
+            </div>
+            <div ng-if="f.text=='Thundershowers'" ng-show="i.id==4">
+              <img ng-src="{{i.img4}}" width="30" height="30" />
+            </div>
+            <div ng-if="f.text=='Scattered Thunderstorms'" ng-show="i.id==5">
+              <img ng-src="{{i.img5}}" width="30" height="30" />
+            </div>
+            <div ng-if="f.text=='Mostly Sunny'" ng-show="i.id==6">
+              <img ng-src="{{i.img6}}" width="30" height="30" />
+            </div>
+            <div ng-if="f.text=='Showers'" ng-show="i.id==7">
+              <img ng-src="{{i.img7}}" width="30" height="30"/>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
-</div>
+  </div>
+</body>
+
+</html>
+</body>
+
+</html>
